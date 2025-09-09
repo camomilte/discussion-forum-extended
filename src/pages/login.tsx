@@ -1,4 +1,4 @@
-import LoginForm from "../component/LoginForm";
+import LoginForm from "../component/LoginForm.tsx";
 
 function LoginPage() {
   return (

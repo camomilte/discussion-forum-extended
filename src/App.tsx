@@ -12,6 +12,7 @@ import "./App.css";
 import { CommentProvider } from "./context/commentContext";
 // Import localStorage logic
 import { initLocalStorage } from './utils/localStorageService';
+import { ToastContainer } from "react-toastify";
 
 
 function App() {
@@ -36,6 +37,8 @@ function App() {
 
           {/*--CreateThreadPage--*/  }
           <Route path="/createthread" element={<CreateThreadPage/>} />
+
+          <ToastContainer />
 
         </Routes>
       </Router>

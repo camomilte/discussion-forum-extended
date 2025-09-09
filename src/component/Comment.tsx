@@ -41,7 +41,7 @@ function CommentItem({ comment }: CommentItemProps) {
           </svg>
         )}
         {/* Show creator's username or anon if none is provided */}
-        <p>{comment.creator?.userName || "Anon"}</p>
+        <p>{comment.creator?.username || "Anon"}</p>
       </div>
       
 
