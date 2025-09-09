@@ -1,17 +1,59 @@
-/*
-hex
---text: #040a0d;
---background: #fafcfd;
---primary: #479cc8;
---secondary: #90c5e0;
---accent: #ff8d7e;
-rgb
---text: rgb(4, 10, 13);
---background: rgb(250, 252, 253);
---primary: rgb(71, 156, 200);
---secondary: rgb(144, 197, 224);
---accent: rgb(255, 141, 126);
-*/
+@import "tailwindcss";
+
+/* @theme {
+
+  --text: oklch(94.38% 0.029 9.72);
+  --text-50: oklch(94.38% 0.029 9.72);
+  --text-100: oklch(89.13% 0.058 10.39);
+  --text-200: oklch(79.14% 0.123 12.67);
+  --text-300: oklch(70.80% 0.186 16.19);
+  --text-400: oklch(65.17% 0.235 21.36);
+  --text-500: oklch(62.90% 0.256 26.93);
+  --text-600: oklch(53.18% 0.216 26.56);
+  --text-700: oklch(42.99% 0.175 25.91);
+  --text-800: oklch(32.16% 0.130 24.48);
+  --text-900: oklch(20.31% 0.082 20.30);
+  --text-950: oklch(13.83% 0.055 15.80);
+
+  --background: oklch(31.97% 0.073 285.82);
+  --background-50: oklch(95.22% 0.011 291.95);
+  --background-100: oklch(90.42% 0.023 291.34);
+  --background-200: oklch(80.79% 0.045 289.66);
+  --background-300: oklch(70.79% 0.071 289.12);
+  --background-400: oklch(60.59% 0.099 287.92);
+  --background-500: oklch(50.39% 0.125 285.47);
+  --background-600: oklch(43.07% 0.106 285.87);
+  --background-700: oklch(35.57% 0.083 286.02);
+  --background-800: oklch(27.65% 0.058 286.23);
+  --background-900: oklch(18.96% 0.034 288.09);
+  --background-950: oklch(14.42% 0.017 284.01);
+
+  --primary: oklch(82.55% 0.086 356.54);
+  --primary-50: oklch(95.09% 0.022 356.33);
+  --primary-100: oklch(90.07% 0.047 354.49);
+  --primary-200: oklch(80.51% 0.098 357.11);
+  --primary-300: oklch(71.75% 0.150 359.36);
+  --primary-400: oklch(64.38% 0.196 2.87);
+  --primary-500: oklch(59.04% 0.222 8.70);
+  --primary-600: oklch(50.24% 0.188 8.07);
+  --primary-700: oklch(40.89% 0.151 7.53);
+  --primary-800: oklch(30.99% 0.110 6.60);
+  --primary-900: oklch(20.33% 0.066 2.72);
+  --primary-950: oklch(14.25% 0.041 356.29);
+  
+  --secondary: oklch(81.35% 0.091 277.30);
+  --secondary-50: oklch(93.80% 0.029 279.36);
+  --secondary-100: oklch(87.82% 0.058 277.69);
+  --secondary-200: oklch(75.53% 0.121 276.87);
+  --secondary-300: oklch(63.86% 0.187 273.47);
+  --secondary-400: oklch(53.59% 0.248 268.77);
+  --secondary-500: oklch(46.61% 0.293 264.57);
+  --secondary-600: oklch(39.60% 0.246 264.70);
+  --secondary-700: oklch(32.30% 0.196 264.92);
+  --secondary-800: oklch(24.60% 0.143 265.35);
+  --secondary-900: oklch(16.64% 0.084 264.64);
+  --secondary-950: oklch(12.10% 0.051 265.48);
+} */
 
 :root {
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;

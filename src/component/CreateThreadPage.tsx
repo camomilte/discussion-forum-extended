@@ -47,7 +47,7 @@ export default function CreateThreadPage() {
   
     
   return (
-    <div className='thread-form'>
+    <div className='thread-form w-100'>
         <h1>Create Thread</h1>
         <form className='formlayout' onSubmit={handleSubmit}>
             <label htmlFor="title" className='form-label align-start'>Title</label>
