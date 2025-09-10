@@ -13,9 +13,8 @@ export type CommentContextType = {
 
 export type UserContextType = {
   user: UserProfile | null;
-  token: string | null;
-  registerUser: (email: string, username: string, password: string) => void;
-  loginUser: (username: string, password: string) => void;
-  logout: () => void;
-  isLoggedIn: () => boolean;
-};
+  isReady: boolean;
+  register: (email: string, username: string, password: string) => Promise<void>;
+  login: (username: string, password: string) => Promise<void>;
+  logout: () => Promise<void>;
+}

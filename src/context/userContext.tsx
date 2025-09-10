@@ -1,36 +1,51 @@
-import type React from "react";
-import { createContext, useEffect, useState } from "react";
-import type { UserContextType } from "../models/contextTypes";
-import { useNavigate } from "react-router-dom";
+import { createContext, useContext, useEffect, useState } from "react";
 import type { UserProfile } from "../models/users";
-import axios from "axios";
+import * as authService from "../utils/authService";
 
-type Props = { children: React.ReactNode };
+interface UserContextType {
+  user: UserProfile | null;
+  isReady: boolean;
+  login: (username: string, password: string) => Promise<void>;
+  logout: () => Promise<void>;
+}
 
 const UserContext = createContext<UserContextType>({} as UserContextType);
 
-export const UserProvider = ({ children }: Props) => {
- const navigate = useNavigate();
- const [token, setToken] = useState<string | null>(null);
- const [user, setUser] = useState<UserProfile | null>(null);
- const [isReady, setIsReady] = useState(false);
+export const UserProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+  const [user, setUser] = useState<UserProfile | null>(null);
+  const [isReady, setIsReady] = useState(false);
 
   useEffect(() => {
-  const fetchUser = async () => {
-    try {
-      const response = await axios.get<UserProfile>("https://localhost:5167/api/account/me", {
-          withCredentials: true,
-        });
-      setUser(response.data);
+    // Check if user already logged in (cookie still valid)
+    const init = async () => {
+      try {
+        const profile = await authService.getCurrentUser();
+        setUser(profile);
       } catch {
         setUser(null);
       } finally {
         setIsReady(true);
       }
     };
-   fetchUser();
+    init();
   }, []);
 
+  const login = async (username: string, password: string) => {
+    await authService.login(username, password);
+    const profile = await authService.getCurrentUser();
+    setUser(profile);
+  };
 
+  const logout = async () => {
+    await authService.logout();
+    setUser(null);
+  };
 
-}
+  return (
+    <UserContext.Provider value={{ user, isReady, login, logout }}>
+      {children}
+    </UserContext.Provider>
+  );
+};
+
+export const useUser = () => useContext(UserContext);
