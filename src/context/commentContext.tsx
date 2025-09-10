@@ -1,6 +1,6 @@
 // Import types
 import type { Comment } from "../types/types";
-import type { CommentContextType } from "../types/contextTypes";
+import type { CommentContextType } from "../models/contextTypes";
 // Import React hooks and types
 import { createContext, useContext, useEffect, useState } from "react";
 // Import dummy data
