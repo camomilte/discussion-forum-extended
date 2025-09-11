@@ -1,37 +1,29 @@
 import axios from "axios";
-import { handleError } from "./errorHandler";
-import type { UserProfileToken } from "../models/users";
 
-const api = `https://localhost:5167/api`;
+const API_URL = "";
 
-export const loginAPI = async (
-  username: string, 
-  password: string
-) => {
-  try {
-    const data = await axios.post<UserProfileToken>(api + "/account/login", {
-      username: username,
-      password: password
-    });
-    return data
-  } catch (error) {
-    handleError(error);
-  }
-}
+axios.defaults.withCredentials = true;
 
-export const registerAPI = async (
-  email: string, 
-  username: string, 
-  password: string
-) => {
-  try {
-    const data = await axios.post<UserProfileToken>(api + "/account/register", {
-      email: email,
-      username: username,
-      password: password
-    });
-    return data
-  } catch (error) {
-    handleError(error);
-  }
-}
+export const login = async (email: string, password: string): Promise<any> => {
+  const response = await axios.post(`${API_URL}/auth/signin`, {
+    'Email': email, 
+    'Password': password 
+  }, { withCredentials: true });
+
+  console.log(response)
+  return response;
+  
+};
+
+export const logout = async (): Promise<void> => {
+  await axios.post(`${API_URL}/auth/signout`);
+};
+
+export const register = async ( email: string, username:string, password:string): Promise<void> => {
+  const response = await axios.post(`${API_URL}/auth/register`, { 
+    email, 
+    username, 
+    password 
+  }, { withCredentials: true });
+  return response.data;
+};

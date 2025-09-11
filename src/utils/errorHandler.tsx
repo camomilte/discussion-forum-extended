@@ -1,4 +1,4 @@
-import axios from "axios";
+/* import axios from "axios";
 import { toast } from "react-toastify";
 
 export const handleError = (error: any) => {
@@ -21,4 +21,4 @@ export const handleError = (error: any) => {
       toast.warning(err?.data);
     }
   }
-};
+}; */
