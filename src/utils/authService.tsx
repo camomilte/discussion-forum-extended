@@ -27,3 +27,11 @@ export const register = async ( email: string, username:string, password:string)
   }, { withCredentials: true });
   return response.data;
 };
+export const register = async ( email: string, username:string, password:string): Promise<void> => {
+  const response = await axios.post(`${API_URL}/auth/register`, { 
+    email, 
+    username, 
+    password 
+  }, { withCredentials: true });
+  return response.data;
+};
