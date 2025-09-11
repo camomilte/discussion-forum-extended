@@ -3,16 +3,19 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { useEffect } from "react";
 // Import Page components
 import CreateThreadPage from './component/CreateThreadPage'
-import HomePage from "./pages/home";
-import LoginPage from "./pages/login";
-import ThreadPage from "./pages/threadDetail";
+import HomePage from "./pages/HomePage";
+import LoginPage from "./pages/LoginPage";
+import ThreadPage from "./pages/ThreadDetailPage";
 // Import styling
 import "./App.css";
 // Import conext
 import { CommentProvider } from "./context/commentContext";
 // Import localStorage logic
 import { initLocalStorage } from './utils/localStorageService';
-import { ToastContainer } from "react-toastify";
+import RegisterPage from "./pages/RegisterPage";
+
+
+/* import { ToastContainer } from "react-toastify"; */
 
 
 function App() {
@@ -31,6 +34,9 @@ function App() {
 
           {/* -- LoginPage -- */}
           <Route path="/login" element={<LoginPage />} />
+
+          {/* -- RegisterPage -- */}
+          <Route path="/register" element={<RegisterPage />} />
 
           {/*   -- ThreadPage --  */}
           <Route path="/thread/:threadId" element={<ThreadPage />} /> 

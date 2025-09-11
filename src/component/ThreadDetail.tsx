@@ -19,7 +19,7 @@ function ThreadDetail({ thread }: ThreadDetailProps) {
         <p className="align-start">{thread.description}</p>
         <div className="user-info flex align-end background-primary">
           <img src={thread.creator.picture} alt="user profile picture" className="user-image"/>
-          <p>{thread.creator.userName}</p> 
+          <p>{thread.creator.username}</p> 
         </div>
       </div>
   );

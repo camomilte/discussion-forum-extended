@@ -11,10 +11,13 @@ export default function Navbar() {
         <li>
           <Link to="/login">login</Link>
         </li>
-      </ul>
-        <div className='right-navbar'>
+        <li>
+          <Link to="/register">Register</Link>
+        </li>
+        <li className='right-navbar'>
           <CreateThreadButton/>
-        </div>
+        </li>
+      </ul>
       
     </nav>
   )

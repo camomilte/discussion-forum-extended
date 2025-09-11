@@ -1,11 +1,14 @@
 import { useState } from "react";
 import { login } from "../utils/authService";
+import { useNavigate } from "react-router-dom";
 
 function LoginForm() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
+  
+  const navigate = useNavigate();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -16,6 +19,7 @@ function LoginForm() {
       await login(email, password);
       // optionally redirect after login
       console.log("Login successful");
+      navigate("/");
     } catch (err) {
       setError("Invalid username or password");
     } finally {
@@ -34,7 +38,7 @@ function LoginForm() {
           Email
         </label>
         <input
-          id="username"
+          id="email"
           type="text"
           value={email}
           onChange={(e) => setEmail(e.target.value)}

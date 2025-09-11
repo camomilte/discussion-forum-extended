@@ -14,6 +14,7 @@ export const UserProvider: React.FC<{ children: React.ReactNode }> = ({ children
     
     if(result.status = 202) {
       // Successful login
+      console.log("Log in successful")
 
     }else {
       // Login failed
