@@ -1,71 +1,32 @@
-import { createContext, useContext, useEffect, useState } from "react"
-import LocalStorageService from "../utils/localStorageService";
-import type { Thread } from '../types/types';
+import { createContext, useContext, useState } from "react";
+import type { Thread, ThreadCategory, ThreadContextType } from "../models/threads";
+import { createThread, fetchThreads } from "../utils/apiService";
 
-type ThreadState= {
-    Threads:Thread[];
-    selectedThreadId?:number;
-    actions: {
-        createThread:(thread:Thread)=>void
-    }
-}
-
-const initialState:ThreadState={
-    Threads:[],
-    actions:{
-        createThread:()=>{}
-    }
-}
+const ThreadContext = createContext<ThreadContextType | undefined>(undefined);
 
 
-const ThreadContext=createContext<ThreadState>(initialState)
+export const ThreadProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+    const [threads, setThreads] = useState<Thread[]>([]);
 
-type ThreadProviderProps={
-    children:React.ReactNode;
-}
+    const addThread = async (thread: { header: string; text: string; category: ThreadCategory }) => {
+        const newThread = await createThread(thread);
+        setThreads((prev) => [...prev, newThread]);
+    };
 
-const ThreadContextProvider: React.FC<ThreadProviderProps>=({children})=>{
+    const loadThreads = async () => {
+        const allThreads = await fetchThreads();
+        setThreads(allThreads);
+    };
 
-    const [threads,setThreads]=useState<Thread[]>([])
-    useEffect(()=>{
-        _getThreads()
-    },[])
+  return (
+    <ThreadContext.Provider value={{ threads, addThread, loadThreads }}>
+      {children}
+    </ThreadContext.Provider>
+  );
+};
 
-    const _getThreads = () => {
-        const _threads:Thread[] = LocalStorageService.getItem("@Thread",[])
-        setThreads(_threads)
-    }
-    const _setThreads = (_threads:Thread[])=>{
-        LocalStorageService.setItem("@Thread",_threads)
-        setThreads(_threads)
-    }
-    const createThread:typeof initialState.actions.createThread = (thread) => {
-        const updatedThreads=[ ...threads, thread]
-        _setThreads(updatedThreads)
-    }
-    const actions :typeof initialState.actions={
-        createThread
-    }
-
-    return(
-        <ThreadContext.Provider value={{
-            Threads:threads,
-            actions
-        }}>
-            {children}
-        </ThreadContext.Provider>
-    )
-}
-
-const useThread=()=>{
-    const context=useContext(ThreadContext);
-    if (context===undefined) {
-        throw new Error('useThread must be used within a threadprovider')
-    }
-    return context;
-}
-
-export{
-    ThreadContextProvider,
-    useThread
+export function useThread() {
+  const context = useContext(ThreadContext);
+  if (!context) throw new Error("useThread must be used within a ThreadProvider");
+  return context;
 }

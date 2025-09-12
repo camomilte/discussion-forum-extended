@@ -1,5 +1,4 @@
 import type { Comment } from "../types/types";
-import type { UserProfile } from "./users";
 
 // Define shape of CommentContext
 export type CommentContextType = {
@@ -11,10 +10,5 @@ export type CommentContextType = {
   };
 }
 
-export type UserContextType = {
-  user: UserProfile | null;
-  isReady: boolean;
-  register: (email: string, username: string, password: string) => Promise<void>;
-  login: (username: string, password: string) => Promise<void>;
-  logout: () => Promise<void>;
-}
+
+

@@ -1,43 +1,38 @@
-import { createContext, useContext, useEffect, useState } from "react";
+import { createContext, useContext, useState } from "react";
 import type { UserProfile } from "../models/users";
-import * as authService from "../utils/authService";
-import type { UserContextType } from "../models/contextTypes";
+import * as api from "../utils/apiService.tsx";
+import type { UserContextType } from "../models/users.d.ts";
 
 const UserContext = createContext<UserContextType>({} as UserContextType);
 
 export const UserProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [user, setUser] = useState<UserProfile | null>(null);
-  const [isReady, setIsReady] = useState(false);
 
-  const login = async (username: string, password: string) => {
-    const result = await authService.login(username, password)
-    
-    if(result.status = 202) {
-      // Successful login
-      console.log("Log in successful")
+  const login = async (email: string, password: string) => {
+    const response = await api.login(email, password);
 
-    }else {
-      // Login failed
-      console.error(result)
-    }
+    const authToken = response.data["accessToken"];
+    if (!authToken) throw new Error("No token returned from backend");
+
+    api.setAuthToken(authToken);
+
+    const me = await api.fetchMe();
+    setUser(me);
+    console.log(me);
   };
 
-  
-
-  const logout = async () => {
-    await authService.logout();
+  const logout = async (): Promise<void> => {
     setUser(null);
+    api.setAuthToken(null);
   };
 
-  const register = async (email: string, username:string, password: string) => {
-    const profile = await authService.register(email, username, password);
-    
-    /* const profile = await authService.getCurrentUser(); */
-  }
-
+  const register = async (email: string, username: string, password: string) => {
+    const response = await api.register(email, username, password);
+    return response;
+  };
 
   return (
-    <UserContext.Provider value={{ user, isReady, login, register, logout }}>
+    <UserContext.Provider value={{ user, login, register, logout }}>
       {children}
     </UserContext.Provider>
   );

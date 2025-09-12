@@ -2,7 +2,7 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { useEffect } from "react";
 // Import Page components
-import CreateThreadPage from './component/CreateThreadPage'
+import CreateThreadPage from './pages/CreateThreadPage';
 import HomePage from "./pages/HomePage";
 import LoginPage from "./pages/LoginPage";
 import ThreadPage from "./pages/ThreadDetailPage";
@@ -41,8 +41,8 @@ function App() {
           {/*   -- ThreadPage --  */}
           <Route path="/thread/:threadId" element={<ThreadPage />} /> 
 
-          {/*--CreateThreadPage--*/  }
-          <Route path="/createthread" element={<CreateThreadPage/>} />
+          {/* --CreateThreadPage-- */  }
+          <Route path="/createthread" element={<CreateThreadPage />} />
 
 {/*           <ToastContainer /> */}
 

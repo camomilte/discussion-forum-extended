@@ -1,5 +1,4 @@
 import { Link } from 'react-router-dom'
-import CreateThreadButton from './CreateThreadButton'
 
 export default function Navbar() {
   return (
@@ -14,8 +13,8 @@ export default function Navbar() {
         <li>
           <Link to="/register">Register</Link>
         </li>
-        <li className='right-navbar'>
-          <CreateThreadButton/>
+        <li>
+          <Link to="/createthread">Create thread</Link>
         </li>
       </ul>
       

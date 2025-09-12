@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { register } from "../utils/authService";
+import { register } from "../utils/apiService";
 import { Link, useNavigate } from "react-router-dom";
 
 function LoginForm() {

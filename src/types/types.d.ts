@@ -1,5 +1,5 @@
 // User type for forum users
-export type User = {
+/* export type User = {
   id: string; // Unique identifier
   username: string;
   email: string;
@@ -25,7 +25,7 @@ export type QNAThread =  Thread & {
 	category: "QNA";
 	isAnswered: boolean;
 	commentAnswerId?: number;
-}
+} */
 
 // Comment type 
 export type Comment = {

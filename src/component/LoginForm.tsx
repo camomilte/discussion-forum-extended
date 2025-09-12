@@ -1,14 +1,18 @@
 import { useState } from "react";
-import { login } from "../utils/authService";
+// import { login } from "../utils/authService";
 import { useNavigate } from "react-router-dom";
+import { useUser } from "../context/userContext";
 
 function LoginForm() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
-  
+
   const navigate = useNavigate();
+
+  // Extract hooks
+  const { login } = useUser();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -18,9 +22,9 @@ function LoginForm() {
     try {
       await login(email, password);
       // optionally redirect after login
-      console.log("Login successful");
       navigate("/");
     } catch (err) {
+      console.log(err)
       setError("Invalid username or password");
     } finally {
       setLoading(false);
