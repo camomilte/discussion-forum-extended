@@ -13,13 +13,6 @@ export type Thread = {
   ownerId: number;
 }
 
-/* // Q&A-thread type extension 
-export type QNAThread =  Thread & {
-  category: "QNA";
-  isAnswered: boolean;
-  commentAnswerId?: number;
-} */
-
 export type ThreadContextType = {
   threads: Thread[];
   addThread: (header: string, text: string, category: ThreadCategory) => Promise<Thread>;

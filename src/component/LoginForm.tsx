@@ -1,36 +1,52 @@
+// React functions
 import { useState } from "react";
-// import { login } from "../utils/authService";
+// React router functions
 import { useNavigate } from "react-router-dom";
+// User Context hook
 import { useUser } from "../context/userContext";
 
+// Define LoginForm component
 function LoginForm() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  // States to store input fields
+  const [email, setEmail] = useState(""); // Email
+  const [password, setPassword] = useState(""); // Password
+  
+  // State for errors
   const [error, setError] = useState<string | null>(null);
+  // State for loading status
   const [loading, setLoading] = useState(false);
 
-  const navigate = useNavigate();
-
-  // Extract hooks
+  // Get login function from userContext
   const { login } = useUser();
 
+  // Hook for programmatic navigation
+  const navigate = useNavigate();
+
+  /// /
+  // Function to handle login form submission
+  /// /
   const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setLoading(true);
-    setError(null);
+    e.preventDefault(); // Prevent page reload on submit
+    setLoading(true);   // Show loading state
+    setError(null);     // Clear previous errors
 
     try {
+      // Attempt to run login function
       await login(email, password);
-      // optionally redirect after login
+      // Redirect to home on successful login
       navigate("/");
     } catch (err) {
+      // Log error
       console.log(err)
+      // Display user friendly error message
       setError("Invalid username or password");
     } finally {
+      // Stop loading
       setLoading(false);
     }
   };
 
+  // Rendered TSX
   return (
     <form onSubmit={handleSubmit} className="max-w-sm mx-auto p-4 border rounded">
       <h2 className="text-xl font-bold mb-4">Login</h2>
@@ -76,4 +92,5 @@ function LoginForm() {
   )
 }
 
+// Export component
 export default LoginForm;

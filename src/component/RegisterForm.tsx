@@ -1,45 +1,69 @@
+// React functions
 import { useState } from "react";
-import { register } from "../utils/apiService";
+// Reazct Router functions
 import { Link, useNavigate } from "react-router-dom";
+// Api functions
+import { register } from "../utils/apiService";
 
-function LoginForm() {
-  const [username, setUsername] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+// Define RegiserForm components
+function RegisterForm() {
+  // States to store input fields
+  const [username, setUsername] = useState(""); // Username
+  const [email, setEmail] = useState(""); // Email
+  const [password, setPassword] = useState(""); // Password
+  const [repeatPassword, setRepeatPassword] = useState(""); // Repeat passord
+
+  // State for errors
   const [error, setError] = useState<string | null>(null);
+  // State for loading status
   const [loading, setLoading] = useState(false);
-  const [repeatPassword, setRepeatPassword] = useState("");
 
+  // Hook for programmatic navigation
   const navigate = useNavigate();
 
+  /// /
+  // Function to handle register form submission
+  /// /
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
     setError(null);
 
+    // Check so that username has a minimum of 3 characters
     if (username.length < 3) {
+      // If not show error message
       setError("Username must be at least 3 characters");
+      // Stop loading
       setLoading(false);
       return;
     }
 
+    // Check so that password and repeatPassword are identical
     if (password !== repeatPassword) {
+      // If not show error message
       setError("Passwords do not match");
+      // Stop loading
       setLoading(false);
       return;
     }
 
     try {
+      // Attempt to run register function
       await register(email, username, password);
+      // Consol log on successful register
       console.log("Register successful");
+      // Redirect to log in page
       navigate("/login");
     } catch (err) {
+      // Display user friendly error message
       setError("Error registering user");
     } finally {
+      // Stop loading
       setLoading(false);
     }
   };
 
+  // Rendered tsx
   return (
     <form onSubmit={handleSubmit} className="max-w-sm mx-auto p-4 border rounded">
       <h2 className="text-xl font-bold mb-4">Register</h2>
@@ -114,4 +138,5 @@ function LoginForm() {
   )
 }
 
-export default LoginForm; 
+// Export component
+export default RegisterForm; 
