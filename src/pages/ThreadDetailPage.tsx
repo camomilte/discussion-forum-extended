@@ -39,8 +39,7 @@ function ThreadPage() {
       <ThreadDetail thread={currentThread}/>
       <div>
         <CommentList threadId={currentThread.id} />
-        <CommentForm thread={currentThread}/>
- {/*        <CommentList comments={threadComments} /> */}
+        <CommentForm threadId={currentThread.id}/>
         <Link to="/" className="btn">View all threads</Link>
       </div>
     </div>

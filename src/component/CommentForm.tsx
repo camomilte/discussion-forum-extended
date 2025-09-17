@@ -1,52 +1,72 @@
 // Imports
 import React, { useState } from "react";
 import { useComments } from "../context/commentContext";
-import type { Thread } from "../models/threads";
 
-// Define props for CommentForm
+// Define props for CommentList
 interface CommentFormProps {
-  thread: Thread; 
+  threadId: number;
 }
 
-
 // Define the CommentForm component
-function CommentForm({ thread }:CommentFormProps) {
-  // Destructure actions from context
-  const { actions } = useComments();
-  // Local state for input field 
-  const [content, setContent] = useState("");
+function CommentForm({ threadId }: CommentFormProps) {
+  // Destructure comment functions from context
+  const { addComment } = useComments();
+  // States to store input fields
+  const [text, setText] = useState("");
+
+  // State for errors
+  const [error, setError] = useState<string | null>(null);
+  // State for loading status
+  const [loading, setLoading] = useState(false);
 
   /// /
   // Handle form submission
   /// /
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
+  const handleSubmit = async(e: React.FormEvent) => {
+    e.preventDefault(); // Prevent page reload on submit
+    setLoading(true);   // Show loading state
+    setError(null);     // Clear previous errors
 
-    // If content is empty or just spaces do nothing
-    if (!content.trim()) return;
+    // Check so comment is at least one character
+    if(text.length < 1) {
+      // If not set error message
+      setError("Comment must contain at least one character");
+      // Stop loading
+      setLoading(false);
+      return;
+    }
 
-    // Call addComment with required fields (in this case hardcoded example)
-    actions.addComment({
-      content,
-      threadId: thread.id,
-    });
+    try {
+      const res = await addComment(threadId, text);
+      console.log(res)
+      setText("");
+    } catch (err: any) {
+      if (err.response?.status === 401) {
+        setError("You must be logged in to comment")
+      } else {
+        setError("Error adding comment")
+      }
+    } finally {
+      setLoading(false);
+    }    
+  }; 
 
-    // Reset input field to empty after submit
-    setContent("");
-    
-  };
 
   return (
     <form className="formlayout comment-form" onSubmit={handleSubmit}>
       <textarea
         className="textarea-input flex"
-        value={content}
-        onChange={(e) => setContent(e.target.value)}
+        id="text"
+        value={text}
+        onChange={(e) => setText(e.target.value)}
         placeholder="Join the conversation"
       />
-      <button className="btn form-btn" type="submit">Add Comment</button>
+      {error && <p className="text-red-500 mb-2">{error}</p>}
+      <button className="btn form-btn" type="submit">
+        {loading ? "Adding comment..." : "Add comment"}
+      </button>
     </form>
   );
-}
+};
 
 export default CommentForm;

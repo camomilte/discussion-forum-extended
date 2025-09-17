@@ -2,7 +2,7 @@
 import type { Comment, CommentContextType } from "../models/comments";
 // Import React hooks and types
 import { createContext, useCallback, useContext, useState } from "react";
-import { fetchThreadsComments } from "../utils/apiService";
+import { createComment, fetchThreadsComments } from "../utils/apiService";
 
 // Create new context for comments
 const CommentContext = createContext<CommentContextType | undefined>(undefined);
@@ -12,57 +12,29 @@ export const CommentProvider = ({ children }: { children: React.ReactNode }) => 
   // State to hold comment array
   const [comments, setComments] = useState<Comment[]>([]);
 
-  // State for errors
-  const [error, setError] = useState<string | undefined>(undefined);
-  // State for loading status
-  const [loading, setLoading] = useState(false);
-
   /// /
   // Function to load all comments for specific thread
   /// /
   const loadComments = useCallback(async (threadId: number) => {
-    setLoading(true);
-    setError(undefined);
-    try {
       const allComments = await fetchThreadsComments(threadId);
-      setComments(allComments);   
-    } catch (err: any) {
-      setError(err.message || "Failed to fetch comments");
-    } finally {
-      setLoading(false);
-    }
+      setComments(allComments);
   },[])
 
-/*   /// /
-  // Add comment
   /// /
-  const addComment = (commentData: Omit<Comment, 'id' | 'creationDate'>) => {
-    // Create new comment object
-    const newComment: Comment = {
-      id: generateId(),
-      creationDate: new Date(),
-      ...commentData,
-    };
-    // Update state
-    setComments(prev => [newComment, ...prev]);
-  }; */
-
- /*  /// /
-  // Delete comment
+  // Function to create a comment under specific thread
   /// /
-  const deleteComment = (id: number) => {
-    // Filter out commment with matching id
-    setComments(prev => prev.filter(comment => comment.id !== id));
-  }; */
+  const addComment = async (threadId: number, text: string) => {
+    const newComment = await createComment(text, threadId);
+    setComments((prev) => [...prev, newComment]);
+  }
 
   // Provide comments array and grouped actions to all child components
   return (
     <CommentContext.Provider 
       value={{ 
-        comments, 
-        error, 
-        loading, 
+        comments,
         loadComments,
+        addComment
         }}>
       {children}
     </CommentContext.Provider>

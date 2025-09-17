@@ -4,6 +4,7 @@ import type { Comment } from "../models/comments";
 // Define props for CommentItem
 interface CommentItemProps {
   comment: Comment; // Single comment
+  key: number;
 }
 
 

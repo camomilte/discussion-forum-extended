@@ -9,6 +9,8 @@ interface ThreadDetailProps {
 // Define ThreadDetail component
 function ThreadDetail({ thread }: ThreadDetailProps) {
 
+  console.log(thread.category)
+
   return (
       <div className="container-post flex flex-col background-secondary">
         <div className="flex thread-info">

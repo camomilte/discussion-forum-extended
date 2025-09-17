@@ -31,7 +31,7 @@ export const setAuthToken = (token: string | null) => {
 /// /
 export const login = async (email: string, password: string) => {
   // Send post request with email and password
-  const response = await api.post("/auth/signin", { Email: email, Password: password });
+  const response = await api.post("/auth/sign-in", { Email: email, Password: password });
   // Return response (with auth token)
   return response;
 };
@@ -41,7 +41,7 @@ export const login = async (email: string, password: string) => {
 /// /
 export const logout = async () => {
   // Send post request to end session
-  await api.post("/auth/signout");
+  await api.post("/auth/sign-out");
 };
 
 /// /
@@ -101,5 +101,13 @@ export const singleThread = async (id: number): Promise<Thread> => {
 /// /
 export const fetchThreadsComments = async (threadId:number): Promise<Comment[]> => {
   const res = await api.get<Comment[]>(`/threads/${threadId}/comments`);
+  return res.data
+}
+
+/// /
+// Function to create comment
+/// /
+export const createComment = async(text: string, threadId: number): Promise<Comment> => {
+  const res = await api.post<Comment>(`/threads/${threadId}/comments`, {Text: text});
   return res.data
 }

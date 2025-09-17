@@ -9,8 +9,7 @@ export type Comment = {
 }
 
 export type CommentContextType = {
-	loading?: boolean;
-	error?: string | undefined;
 	comments: Comment[];
 	loadComments: (threadId: number) => Promise<void>;
+	addComment: (threadId: number, text: string) => Promise<void>;
 }

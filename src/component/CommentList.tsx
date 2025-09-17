@@ -1,7 +1,7 @@
 // Imports
 import { PropagateLoader } from "react-spinners";
 import CommentItem from "./Comment";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useComments } from "../context/commentContext";
 
 // Define props for CommentList
@@ -11,34 +11,38 @@ interface CommentListProps {
 
 // Define CommentList component
 function CommentList({ threadId }: CommentListProps) {
-  const { comments, loadComments, loading, error } = useComments();
-
-  useEffect(() => {
-    loadComments(threadId);
-  }, [threadId, loadComments]);
-
-  console.log(comments)
-
-  if(loading) {
-    return <PropagateLoader />;
-  }
+  const { comments, loadComments } = useComments();
+  // State for errors
+  const [error, setError] = useState<string | null>(null);
+  // State for loading status
+  const [loading, setLoading] = useState(false);
   
-  if(error) {
-    return <p style={{ color: "red" }}>{error}</p>;
-  }
-  
-  // If there are no threads display message
-  if (comments.length === 0) {
-    return <p className="text-gray-500">No comments yet</p>;
-  }
+
+useEffect(() => {
+  const fetchComments = async () => {
+    setLoading(true);
+    setError(null);
+    try {
+      await loadComments(threadId);
+    } catch (err: any) {
+      setError(err.message || "Failed to fetch");
+    } finally {
+      setLoading(false); 
+    }
+  };
+
+  fetchComments();
+}, [threadId, loadComments]);
 
   return (
     <div>
       {/* Render CommentItem for each comment in Comment array */}
+      {error && <p className="text-red-500 mb-2">{error}</p>}
+      {loading && <PropagateLoader />}
       {comments.map((comment) => (
-        <CommentItem 
-          key={comment.id} 
-          comment={comment} 
+        <CommentItem
+          comment={comment}
+          key={comment.id}
           />
       ))}
     </div>
