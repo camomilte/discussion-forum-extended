@@ -10,8 +10,7 @@ import ThreadPage from "./pages/ThreadDetailPage";
 import "./App.css";
 // Import conext
 import { CommentProvider } from "./context/commentContext";
-// Import localStorage logic
-import { initLocalStorage } from './utils/localStorageService';
+
 import RegisterPage from "./pages/RegisterPage";
 
 
@@ -19,10 +18,6 @@ import RegisterPage from "./pages/RegisterPage";
 
 
 function App() {
-  // Seed localStorage when React mounts
-  useEffect(() => {
-    initLocalStorage(); 
-  }, []);
   
   return (
     <CommentProvider>
@@ -42,7 +37,7 @@ function App() {
           <Route path="/thread/:threadId" element={<ThreadPage />} /> 
 
           {/* --CreateThreadPage-- */  }
-          <Route path="/createthread" element={<CreateThreadPage />} />
+          <Route path="/createthread" element={<CreateThreadPage/>} />
 
 {/*           <ToastContainer /> */}
 

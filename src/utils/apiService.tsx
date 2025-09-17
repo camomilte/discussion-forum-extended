@@ -86,3 +86,11 @@ export const createThread = async(header: string, text: string, category: Thread
   // Return response data
   return res.data;
 }
+
+/// /
+// Function to fetch single thread
+/// /
+export const singleThread = async (id: number): Promise<Thread> => {
+  const res = await api.get<Thread>(`/threads/${id}`);
+  return res.data;
+}

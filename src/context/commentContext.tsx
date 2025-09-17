@@ -1,10 +1,8 @@
 // Import types
-import type { Comment } from "../types/types";
+import type { Comment } from "../models/comments";
 import type { CommentContextType } from "../models/contextTypes";
 // Import React hooks and types
 import { createContext, useContext, useEffect, useState } from "react";
-// Import dummy data
-import { dummyComments } from "../dummy-data/comments";
 
 // Create new context for comments
 const CommentContext = createContext<CommentContextType | undefined>(undefined);
@@ -26,9 +24,7 @@ export const CommentProvider = ({ children }: { children: React.ReactNode }) => 
         creationDate: new Date(c.creationDate),
       }));
     }
-
-    // Fallback with dummy comments if localstorage is empty
-    return dummyComments;
+    return;
   });
 
   // Save to localStorage whenever comments change

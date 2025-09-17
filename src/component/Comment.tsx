@@ -1,5 +1,5 @@
 // Import
-import type { Comment } from "../types/types";
+import type { Comment } from "../models/comments";
 
 // Define props for CommentItem
 interface CommentItemProps {

@@ -2,44 +2,43 @@
 import { Link, useParams } from "react-router-dom";
 // Import UI components
 import CommentForm from "../component/CommentForm";
-import CommentList from "../component/CommentList";
+/* import CommentList from "../component/CommentList"; */
 import ThreadDetail from "../component/ThreadDetail";
-// Import contexts
-import { useComments } from "../context/commentContext";
+
+import { PropagateLoader } from "react-spinners";
+import { useEffect } from "react";
 import { useThread } from "../context/threadContext";
 
 
 // Define ThreadPage components
 function ThreadPage() {
-  // Get thread id from route
   const { threadId } = useParams<{ threadId: string }>();
+  const { currentThread, getThread, loading, error } = useThread();
 
-  // Get all threads from context
-  const { Threads } = useThread();
+  useEffect(() => {
+    if (threadId) {
+      getThread(Number(threadId));
+    }
+  }, [threadId, getThread]);
 
-  // Get all comments from context
-  const { comments } = useComments();
+  if(loading) {
+    return <PropagateLoader />;
+  }
 
-  // Find thread with matching current URL threadId
-  const thread = Threads.find(t => t.id === Number(threadId));
+  if(error) {
+    return <p>{error}</p>
+  }
 
-  // If no matching thread, show error message and link to home page
-  if (!thread) return (
-    <div>
-      <p className="text-red-500">Thread not found</p>
-      <Link to="/">View all threads</Link>
-    </div>
-  )
-
-  // Filter comments belonging to current threadId
-  const threadComments = comments.filter(c => c.threadId === thread.id);
+  if(!currentThread) {
+    return <p>The thread you're looking for could not be found!</p>
+  }
 
   return (
     <div>
-      {thread && <ThreadDetail thread={thread} />}
+      <ThreadDetail thread={currentThread}/>
       <div>
-        <CommentForm thread={thread}/>
-        <CommentList comments={threadComments} />
+        <CommentForm thread={currentThread}/>
+ {/*        <CommentList comments={threadComments} /> */}
         <Link to="/" className="btn">View all threads</Link>
       </div>
     </div>

@@ -14,7 +14,11 @@ export type Thread = {
 }
 
 export type ThreadContextType = {
+  currentThread: Thread | null;
+  loading?: boolean;
+  error?: string | undefined;
   threads: Thread[];
   addThread: (header: string, text: string, category: ThreadCategory) => Promise<Thread>;
   loadThreads: () => Promise<void>;
+  getThread: (id: number) => Promise<void>;
 }

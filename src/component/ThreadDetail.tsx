@@ -1,5 +1,5 @@
 // Import type
-import type { Thread } from "../types/types";
+import type { Thread } from "../models/threads";
 
 // Define props for ThreadDetail
 interface ThreadDetailProps {
@@ -13,13 +13,12 @@ function ThreadDetail({ thread }: ThreadDetailProps) {
       <div className="container-post flex flex-col background-secondary">
         <div className="flex thread-info">
           <p>Category: {thread.category}</p>
-          <p>{new Date(thread.creationDate).toDateString()}</p>
+          <p>{new Date(thread.createdAt).toDateString()}</p>
         </div>
-        <h1>{thread.title}</h1>
-        <p className="align-start">{thread.description}</p>
+        <h1>{thread.header}</h1>
+        <p className="align-start">{thread.text}</p>
         <div className="user-info flex align-end background-primary">
-          <img src={thread.creator.picture} alt="user profile picture" className="user-image"/>
-          <p>{thread.creator.username}</p> 
+          <p>{thread.owner}</p> 
         </div>
       </div>
   );

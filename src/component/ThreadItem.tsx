@@ -1,4 +1,5 @@
 // Import thread type
+import { Link } from "react-router-dom";
 import type { Thread } from "../models/threads";
 
 // Define props for ThreadItem
@@ -10,7 +11,7 @@ interface ThreadItemProps {
 // Define ThreadItem component
 function ThreadItem({ thread, onSelect }: ThreadItemProps) {
   return (
-   <div onClick={() => onSelect(thread.id)}>
+   <Link to={`/thread/${thread.id}`}>
     <p>{thread.createdAt}</p> 
     {thread.resolved && (
       <span>Answered</span>
@@ -18,7 +19,7 @@ function ThreadItem({ thread, onSelect }: ThreadItemProps) {
     <h3>{thread.header}</h3>
     <p>{thread.text}</p>
     <small>{thread.category}</small>
-   </div>
+   </Link>
   );
 }
 

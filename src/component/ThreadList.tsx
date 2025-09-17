@@ -1,5 +1,5 @@
 // Imports
-import { useThread } from "../context/threadContext";
+import { PropagateLoader } from "react-spinners";
 import type { Thread } from "../models/threads";
 import ThreadItem from "./ThreadItem";
 
@@ -7,16 +7,25 @@ import ThreadItem from "./ThreadItem";
 interface ThreadListProps {
   threads: Thread[];
   onSelect: (id: number) => void; // Callback that takes thread id
+  loading?: boolean;
+  error?: string | null;
 }
 
 // Define ThreadList component
-function ThreadList({ onSelect }: ThreadListProps) {
-  // Get all threads from context
-  const { threads } = useThread();
+function ThreadList({ onSelect, error, loading, threads }: ThreadListProps) {
 
+  
+  if(loading) {
+    return <PropagateLoader />;
+  }
+  
+  if(error) {
+    return <p style={{ color: "red" }}>{error}</p>;
+  }
+  
   // If there are no threads display message
   if (threads.length === 0) {
-    return <p className="text-gray-500">No threads yet</p>;
+    return <p className="text-gray-500">No threads available</p>;
   }
 
   return (
