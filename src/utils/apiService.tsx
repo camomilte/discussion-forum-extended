@@ -3,6 +3,7 @@ import axios from "axios";
 // Types
 import type { UserProfile } from "../models/users";
 import type { Thread, ThreadCategory } from "../models/threads";
+import type { Comment } from "../models/comments";
 
 // Define base URL taken from enviroment viarables
 const API_URL = import.meta.env.VITE_API_URL;
@@ -93,4 +94,12 @@ export const createThread = async(header: string, text: string, category: Thread
 export const singleThread = async (id: number): Promise<Thread> => {
   const res = await api.get<Thread>(`/threads/${id}`);
   return res.data;
+}
+
+/// /
+// Function to fetch all comments based of thread id
+/// /
+export const fetchThreadsComments = async (threadId:number): Promise<Comment[]> => {
+  const res = await api.get<Comment[]>(`/threads/${threadId}/comments`);
+  return res.data
 }

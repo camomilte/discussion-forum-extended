@@ -8,6 +8,7 @@ import ThreadDetail from "../component/ThreadDetail";
 import { PropagateLoader } from "react-spinners";
 import { useEffect } from "react";
 import { useThread } from "../context/threadContext";
+import CommentList from "../component/CommentList";
 
 
 // Define ThreadPage components
@@ -37,6 +38,7 @@ function ThreadPage() {
     <div>
       <ThreadDetail thread={currentThread}/>
       <div>
+        <CommentList threadId={currentThread.id} />
         <CommentForm thread={currentThread}/>
  {/*        <CommentList comments={threadComments} /> */}
         <Link to="/" className="btn">View all threads</Link>

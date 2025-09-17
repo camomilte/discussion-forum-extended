@@ -1,7 +1,7 @@
 // Imports
 import React, { useState } from "react";
 import { useComments } from "../context/commentContext";
-import type { Thread } from "../types/types";
+import type { Thread } from "../models/threads";
 
 // Define props for CommentForm
 interface CommentFormProps {

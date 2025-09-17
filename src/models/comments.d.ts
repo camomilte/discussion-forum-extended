@@ -1,8 +1,16 @@
 // Comment type 
 export type Comment = {
 	id: number;
-	threadId: Thread["id"];
-	content: string;
-	creator?: User,
-  creationDate: Date;
+	parentThreadId: number;
+	text: string;
+	owner: string;
+	ownerId: number;
+  createdAt: string;
+}
+
+export type CommentContextType = {
+	loading?: boolean;
+	error?: string | undefined;
+	comments: Comment[];
+	loadComments: (threadId: number) => Promise<void>;
 }

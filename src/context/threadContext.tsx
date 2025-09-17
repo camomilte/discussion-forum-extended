@@ -15,7 +15,7 @@ export const ThreadProvider: React.FC<{ children: React.ReactNode }> = ({ childr
     // State holds single thread
     const [currentThread, setCurrentThread] = useState<Thread | null>(null);
 
-     // State for errors
+    // State for errors
     const [error, setError] = useState<string | undefined>(undefined);
     // State for loading status
     const [loading, setLoading] = useState(false);
@@ -51,7 +51,6 @@ export const ThreadProvider: React.FC<{ children: React.ReactNode }> = ({ childr
         setError(undefined);
         try {
             const fetchedThread = await singleThread(threadId);
-            console.log(fetchedThread)
             setCurrentThread(fetchedThread);
         } catch (err: any) {
             setError(err.message || "Failed to load thread");
