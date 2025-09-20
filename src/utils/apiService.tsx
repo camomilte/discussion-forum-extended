@@ -58,15 +58,25 @@ export const register = async (email: string, username: string, password: string
 // Function to fetch current user
 /// /
 export const fetchMe = async(): Promise<UserProfile | null> => {
-  // Send a get request to 'users/me'
-  const res = await api.get<UserProfile>("/users/me");
-  // If status is 200, 202 or 204, return profile data
-  if([200, 202, 204].includes(res.status)) {
-    return res.data;
-  }
-  // If not, return null
-  return null;
-}
+  try {
+    const res = await api.get<UserProfile>("/users/me");
+
+    if ([200, 202, 204].includes(res.status)) {
+      return res.data;
+    }
+
+    return null;
+
+  } catch (error: any) {
+    if (error.response?.status === 401) {
+      console.error("Unauthorized: Invalid or expired token.");
+    } else {
+      console.error("Error fetching user");
+    }
+
+    return null;
+  };
+};
 
 /// /
 // Function to get all threads

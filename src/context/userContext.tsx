@@ -12,6 +12,8 @@ const UserContext = createContext<UserContextType>({} as UserContextType);
 export const UserProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   // State to hold user, inistially empty
   const [user, setUser] = useState<UserProfile | null>(null);
+  // State to hold user authorisation
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   /// /
   // Function to login
@@ -27,23 +29,7 @@ export const UserProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
     // Store token for future requests
     api.setAuthToken(authToken);
-
-    // Fetch current user profile data
-    const me = await api.fetchMe();
-    // Save user to state
-    setUser(me);
-    // Log user
-    console.log(me);
-  };
-
-  /// /
-  // Function to log out user
-  /// /
-  const logout = async (): Promise<void> => {
-    // Clear current user from state
-    setUser(null);
-    // Remove authentication token
-    api.setAuthToken(null);
+  
   };
 
   /// /
@@ -56,9 +42,30 @@ export const UserProvider: React.FC<{ children: React.ReactNode }> = ({ children
     return response;
   };
 
+  /// / 
+  // Function to check if user is logged in
+  /// /
+  const currentUser = async () => {
+    const fetchedUser = await api.fetchMe();
+    console.log("Fetched user:", fetchedUser);
+    setUser(fetchedUser);
+    setIsLoggedIn(!!fetchedUser);
+  };
+
+  /// /
+  // Function to log out user
+  /// /
+  const logoutUser = async () => {
+    await api.logout();
+
+    setUser(null);
+    setIsLoggedIn(false);
+  };
+
+
   // Provide user context functions and states to all child components
   return (
-    <UserContext.Provider value={{ user, login, register, logout }}>
+    <UserContext.Provider value={{ user, login, register, currentUser, logoutUser, isLoggedIn }}>
       {children}
     </UserContext.Provider>
   );

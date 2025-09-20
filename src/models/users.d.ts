@@ -8,5 +8,7 @@ export type UserContextType = {
   user: UserProfile | null;
   register: (email: string, username: string, password: string) => Promise<AxiosResponse<any>>;
   login: (username: string, password: string) => Promise<>;
-  logout: () => Promise<void>;
+  logoutUser: () => Promise<void>;
+  currentUser: () => Promise<void>;
+  isLoggedIn: boolean;
 }

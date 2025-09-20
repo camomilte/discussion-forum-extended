@@ -12,6 +12,7 @@ import "./App.css";
 import { CommentProvider } from "./context/commentContext";
 
 import RegisterPage from "./pages/RegisterPage";
+import { UserProvider } from "./context/userContext";
 
 
 /* import { ToastContainer } from "react-toastify"; */
@@ -21,28 +22,30 @@ function App() {
   
   return (
     <CommentProvider>
-      <Router>
-        <Routes>
+      <UserProvider>
+        <Router>
+          <Routes>
 
-          {/* -- HomePage -- */}
-          <Route path="/" element={<HomePage />} />
+            {/* -- HomePage -- */}
+            <Route path="/" element={<HomePage />} />
 
-          {/* -- LoginPage -- */}
-          <Route path="/login" element={<LoginPage />} />
+            {/* -- LoginPage -- */}
+            <Route path="/login" element={<LoginPage />} />
 
-          {/* -- RegisterPage -- */}
-          <Route path="/register" element={<RegisterPage />} />
+            {/* -- RegisterPage -- */}
+            <Route path="/register" element={<RegisterPage />} />
 
-          {/*   -- ThreadPage --  */}
-          <Route path="/thread/:threadId" element={<ThreadPage />} /> 
+            {/*   -- ThreadPage --  */}
+            <Route path="/thread/:threadId" element={<ThreadPage />} /> 
 
-          {/* --CreateThreadPage-- */  }
-          <Route path="/createthread" element={<CreateThreadPage/>} />
+            {/* --CreateThreadPage-- */  }
+            <Route path="/createthread" element={<CreateThreadPage/>} />
 
-{/*           <ToastContainer /> */}
+  {/*           <ToastContainer /> */}
 
-        </Routes>
-      </Router>
+          </Routes>
+        </Router>
+      </UserProvider>
     </CommentProvider>
   );
 }

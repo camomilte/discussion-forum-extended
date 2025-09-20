@@ -9,7 +9,7 @@ interface ThreadItemProps {
 }
 
 // Define ThreadItem component
-function ThreadItem({ thread, onSelect }: ThreadItemProps) {
+function ThreadItem({ thread }: ThreadItemProps) {
   return (
    <Link to={`/thread/${thread.id}`}>
     <p>{thread.createdAt}</p> 

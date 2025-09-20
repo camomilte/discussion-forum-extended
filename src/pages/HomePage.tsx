@@ -49,7 +49,7 @@ function HomePage() {
   return (
     <div>
       <Navbar/>
-      <h1>Welcome to Dog Community</h1>
+      <h1>Welcome to Bloom & Gloom</h1>
       <ThreadList 
         onSelect={handleSelect} 
         threads={threads} 

@@ -1,6 +1,8 @@
 // Imports
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useComments } from "../context/commentContext";
+import { useUser } from "../context/userContext";
+import { Link } from "react-router-dom";
 
 // Define props for CommentList
 interface CommentFormProps {
@@ -18,6 +20,14 @@ function CommentForm({ threadId }: CommentFormProps) {
   const [error, setError] = useState<string | null>(null);
   // State for loading status
   const [loading, setLoading] = useState(false);
+
+  const { isLoggedIn, user, currentUser } = useUser();
+  console.log("isLoggedIn:", isLoggedIn, "user:", user);
+
+  useEffect(() => {
+    currentUser();
+    console.log("inside useeffect")
+  }, []);
 
   /// /
   // Handle form submission
@@ -54,17 +64,27 @@ function CommentForm({ threadId }: CommentFormProps) {
 
   return (
     <form className="formlayout comment-form" onSubmit={handleSubmit}>
-      <textarea
-        className="textarea-input flex"
-        id="text"
-        value={text}
-        onChange={(e) => setText(e.target.value)}
-        placeholder="Join the conversation"
-      />
-      {error && <p className="text-red-500 mb-2">{error}</p>}
-      <button className="btn form-btn" type="submit">
-        {loading ? "Adding comment..." : "Add comment"}
-      </button>
+      {isLoggedIn ? (
+        <>
+          <textarea
+            className="textarea-input flex"
+            id="text"
+            value={text}
+            onChange={(e) => setText(e.target.value)}
+            placeholder="Join the conversation"
+          />
+          {error && <p className="text-red-500 mb-2">{error}</p>}
+          <button className="btn form-btn" type="submit">
+            {loading ? "Adding comment..." : "Add comment"}
+          </button>
+        </>
+      ) : (
+        <div>
+          <p>
+           <Link to="/register">Create account</Link> or <Link to="/login">Log in</Link> to join the conversation
+          </p>
+        </div>
+      )}
     </form>
   );
 };
