@@ -2,6 +2,7 @@
 import { PropagateLoader } from "react-spinners";
 import type { Thread } from "../models/threads";
 import ThreadItem from "./ThreadItem";
+import ErrorIcon from '@mui/icons-material/Error';
 
 // Define props for ThreadList
 interface ThreadListProps {
@@ -16,11 +17,20 @@ function ThreadList({ onSelect, error, loading, threads }: ThreadListProps) {
 
   
   if(loading) {
-    return <PropagateLoader />;
+    return (
+      <div className="flex justify-center items-center h-120">
+        <PropagateLoader color="#40b83d"/>
+      </div>
+      
+    )
   }
   
   if(error) {
-    return <p style={{ color: "red" }}>{error}</p>;
+    return (
+      <div className="border border-red-400 p-3 rounded-lg w-96 md:w-[70%] mx-auto flex mt-5">
+        <ErrorIcon className="text-red-400 pe-1 "/><p className="text-red-400">{error}</p>
+      </div>
+    )
   }
   
   // If there are no threads display message
@@ -29,7 +39,7 @@ function ThreadList({ onSelect, error, loading, threads }: ThreadListProps) {
   }
 
   return (
-     <div >
+     <div className="border-t border-br-background-800 max-w-4xl mx-auto">
       {/* Render ThreadItem for each thread in Thread array */}
       {threads.map((thread) => (
         <ThreadItem

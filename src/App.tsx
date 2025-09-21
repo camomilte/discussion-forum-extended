@@ -1,6 +1,5 @@
 // Import React and React router hooks and components
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import { useEffect } from "react";
 // Import Page components
 import CreateThreadPage from './pages/CreateThreadPage';
 import HomePage from "./pages/HomePage";
@@ -13,20 +12,22 @@ import { CommentProvider } from "./context/commentContext";
 
 import RegisterPage from "./pages/RegisterPage";
 import { UserProvider } from "./context/userContext";
+import RootLayout from "./layouts/RootLayout";
+import { ToastContainer } from "react-toastify/unstyled";
 
+import "react-toastify/dist/ReactToastify.css";
 
-/* import { ToastContainer } from "react-toastify"; */
 
 
 function App() {
   
   return (
-    <div className="bg-br-background">
-
-      <CommentProvider>
-        <UserProvider>
-          <Router>
-            <Routes>
+    <CommentProvider>
+      <UserProvider>
+        <Router>
+          <ToastContainer /> 
+          <Routes>
+            <Route path="/" element={<RootLayout />}>
 
               {/* -- HomePage -- */}
               <Route path="/" element={<HomePage />} />
@@ -42,14 +43,11 @@ function App() {
 
               {/* --CreateThreadPage-- */  }
               <Route path="/createthread" element={<CreateThreadPage/>} />
-
-    {/*           <ToastContainer /> */}
-
-            </Routes>
-          </Router>
-        </UserProvider>
-      </CommentProvider>
-    </div>
+            </Route>
+          </Routes>
+        </Router>
+      </UserProvider>
+    </CommentProvider>
   );
 }
 
