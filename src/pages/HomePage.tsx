@@ -49,7 +49,7 @@ function HomePage() {
   return (
     <div>
       <Navbar/>
-      <h1>Welcome to Bloom & Gloom</h1>
+      <h1 className="font-title text-6xl text-br-text">Welcome to <span className="text-brand">Bloom & Gloom</span></h1>
       <ThreadList 
         onSelect={handleSelect} 
         threads={threads} 

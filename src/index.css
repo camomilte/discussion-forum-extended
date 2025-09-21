@@ -1,67 +1,91 @@
 
 
+@import url('https://fonts.googleapis.com/css2?family=Passion+One:wght@400;700;900&display=swap');
 @import "tailwindcss";
 
-/* @theme {
-  --text: oklch(94.38% 0.029 9.72);
-  --text-50: oklch(94.38% 0.029 9.72);
-  --text-100: oklch(89.13% 0.058 10.39);
-  --text-200: oklch(79.14% 0.123 12.67);
-  --text-300: oklch(70.80% 0.186 16.19);
-  --text-400: oklch(65.17% 0.235 21.36);
-  --text-500: oklch(62.90% 0.256 26.93);
-  --text-600: oklch(53.18% 0.216 26.56);
-  --text-700: oklch(42.99% 0.175 25.91);
-  --text-800: oklch(32.16% 0.130 24.48);
-  --text-900: oklch(20.31% 0.082 20.30);
-  --text-950: oklch(13.83% 0.055 15.80);
+@theme {
+  --color-br-text: oklch(95.61% 0.038 77.64);
+  --color-br-background: oklch(22.35% 0.005 145.41);
+  --color-brand: oklch(73.34% 0.205 138.31);
+  --secondary: oklch(93.37% 0.144 135.46);
+  --color-br-accent: oklch(84.38% 0.120 68.86);
 
-  --background: oklch(31.97% 0.073 285.82);
-  --background-50: oklch(95.22% 0.011 291.95);
-  --background-100: oklch(90.42% 0.023 291.34);
-  --background-200: oklch(80.79% 0.045 289.66);
-  --background-300: oklch(70.79% 0.071 289.12);
-  --background-400: oklch(60.59% 0.099 287.92);
-  --background-500: oklch(50.39% 0.125 285.47);
-  --background-600: oklch(43.07% 0.106 285.87);
-  --background-700: oklch(35.57% 0.083 286.02);
-  --background-800: oklch(27.65% 0.058 286.23);
-  --background-900: oklch(18.96% 0.034 288.09);
-  --background-950: oklch(14.42% 0.017 284.01);
+  --color-br-text-50: oklch(97.37% 0.024 79.75);
+  --color-br-text-100: oklch(94.82% 0.046 78.85);
+  --color-br-text-200: oklch(89.73% 0.090 77.11);
+  --color-br-text-300: oklch(85.17% 0.129 75.72);
+  --color-br-text-400: oklch(80.86% 0.158 71.53);
+  --color-br-text-500: oklch(77.20% 0.174 64.55);
+  --color-br-text-600: oklch(65.36% 0.147 64.96);
+  --color-br-text-700: oklch(53.16% 0.118 66.44);
+  --color-br-text-800: oklch(40.00% 0.088 68.06);
+  --color-br-text-900: oklch(25.87% 0.055 74.44);
+  --color-br-text-950: oklch(17.90% 0.037 79.02);
 
-  --primary: oklch(82.55% 0.086 356.54);
-  --primary-50: oklch(95.09% 0.022 356.33);
-  --primary-100: oklch(90.07% 0.047 354.49);
-  --primary-200: oklch(80.51% 0.098 357.11);
-  --primary-300: oklch(71.75% 0.150 359.36);
-  --primary-400: oklch(64.38% 0.196 2.87);
-  --primary-500: oklch(59.04% 0.222 8.70);
-  --primary-600: oklch(50.24% 0.188 8.07);
-  --primary-700: oklch(40.89% 0.151 7.53);
-  --primary-800: oklch(30.99% 0.110 6.60);
-  --primary-900: oklch(20.33% 0.066 2.72);
-  --primary-950: oklch(14.25% 0.041 356.29);
-  
-  --secondary: oklch(81.35% 0.091 277.30);
-  --secondary-50: oklch(93.80% 0.029 279.36);
-  --secondary-100: oklch(87.82% 0.058 277.69);
-  --secondary-200: oklch(75.53% 0.121 276.87);
-  --secondary-300: oklch(63.86% 0.187 273.47);
-  --secondary-400: oklch(53.59% 0.248 268.77);
-  --secondary-500: oklch(46.61% 0.293 264.57);
-  --secondary-600: oklch(39.60% 0.246 264.70);
-  --secondary-700: oklch(32.30% 0.196 264.92);
-  --secondary-800: oklch(24.60% 0.143 265.35);
-  --secondary-900: oklch(16.64% 0.084 264.64);
-  --secondary-950: oklch(12.10% 0.051 265.48);
-} */
+  --color-br-background-50: oklch(96.31% 0.002 145.56);
+  --color-br-background-100: oklch(92.48% 0.005 145.53);
+  --color-br-background-200: oklch(84.71% 0.007 145.51);
+  --color-br-background-300: oklch(76.87% 0.013 145.45);
+  --color-br-background-400: oklch(68.71% 0.015 145.41);
+  --color-br-background-500: oklch(60.43% 0.021 145.31);
+  --color-br-background-600: oklch(51.48% 0.016 145.34);
+  --color-br-background-700: oklch(42.26% 0.015 145.31);
+  --color-br-background-800: oklch(32.36% 0.009 145.37);
+  --color-br-background-900: oklch(21.77% 0.007 145.32);
+  --color-br-background-950: oklch(15.75% 0.003 145.45);
+
+  --color-brand-50: oklch(97.28% 0.023 137.24);
+  --color-brand-100: oklch(94.58% 0.047 136.53);
+  --color-brand-200: oklch(89.41% 0.094 136.25);
+  --color-brand-300: oklch(84.21% 0.137 136.88);
+  --color-brand-400: oklch(79.58% 0.178 137.26);
+  --color-brand-500: oklch(75.29% 0.210 138.24);
+  --color-brand-600: oklch(63.83% 0.176 138.10);
+  --color-brand-700: oklch(51.78% 0.140 138.12);
+  --color-brand-800: oklch(39.32% 0.103 137.76);
+  --color-brand-900: oklch(25.40% 0.060 137.71);
+  --color-brand-950: oklch(17.62% 0.034 134.93);
+
+  --color-br-secondary-50: oklch(98.06% 0.038 134.58);
+  --color-br-secondary-100: oklch(96.35% 0.075 134.59);
+  --color-br-secondary-200: oklch(93.26% 0.147 135.21);
+  --color-br-secondary-300: oklch(90.81% 0.210 136.13);
+  --color-br-secondary-400: oklch(88.96% 0.256 137.63);
+  --color-br-secondary-500: oklch(87.78% 0.280 139.50);
+  --color-br-secondary-600: oklch(74.24% 0.236 139.36);
+  --color-br-secondary-700: oklch(60.07% 0.189 139.01);
+  --color-br-secondary-800: oklch(44.98% 0.140 138.49);
+  --color-br-secondary-900: oklch(28.48% 0.086 136.94);
+  --color-br-secondary-950: oklch(19.51% 0.056 134.34);
+
+  --color-br-accent-50: oklch(96.98% 0.023 71.79);
+  --color-br-accent-100: oklch(94.05% 0.044 70.53);
+  --color-br-accent-200: oklch(88.39% 0.088 69.59);
+  --color-br-accent-300: oklch(83.32% 0.129 68.39);
+  --color-br-accent-400: oklch(78.56% 0.161 64.14);
+  --color-br-accent-500: oklch(74.42% 0.181 56.46);
+  --color-br-accent-600: oklch(63.14% 0.152 57.26);
+  --color-br-accent-700: oklch(51.33% 0.122 58.58);
+  --color-br-accent-800: oklch(38.60% 0.091 60.02);
+  --color-br-accent-900: oklch(24.93% 0.056 65.91);
+  --color-br-accent-950: oklch(17.63% 0.037 75.53);
+
+  --font-title: "Passion One", sans-serif;
+
+}
+
+* {    
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+
 :root {
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
-
-  color: rgb(4, 10, 13);
-  background-color: #fafcfd;
+  
+  padding: 0;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -90,17 +114,8 @@ a:hover {
   color: var(--primary);
 }
 
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
-}
-
 body {
-  margin: 0;
-  display: flex;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
+  background-color: var(--color-br-background);
 }
 
 /* --- BUTTONS --- */
@@ -186,24 +201,6 @@ svg.user-image {
   padding-left: 0.5rem;
   font-size: 0.9rem;
   color: var(--text-soft);
-}
-
-/* NAVBAR */
-.navbar{
-  display: flex;
-  flex-direction: row;
-}
-.navbar ul{
-  display: flex;
-  flex-direction: row;
-  justify-content: space-evenly;
-  overflow: hidden;
-}
-.navbar a{
-  padding: 15px;
-}
-.right-navbar{
-  margin-left: 15em;
 }
 
 /* FORM */
@@ -304,18 +301,4 @@ svg.user-image {
 
 .background-gray-200 {
   background-color: oklch(94.827% 0.00756 260.887);
-}
-
-
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
-  }
 }

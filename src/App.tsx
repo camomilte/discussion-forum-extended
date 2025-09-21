@@ -21,32 +21,35 @@ import { UserProvider } from "./context/userContext";
 function App() {
   
   return (
-    <CommentProvider>
-      <UserProvider>
-        <Router>
-          <Routes>
+    <div className="bg-br-background">
 
-            {/* -- HomePage -- */}
-            <Route path="/" element={<HomePage />} />
+      <CommentProvider>
+        <UserProvider>
+          <Router>
+            <Routes>
 
-            {/* -- LoginPage -- */}
-            <Route path="/login" element={<LoginPage />} />
+              {/* -- HomePage -- */}
+              <Route path="/" element={<HomePage />} />
 
-            {/* -- RegisterPage -- */}
-            <Route path="/register" element={<RegisterPage />} />
+              {/* -- LoginPage -- */}
+              <Route path="/login" element={<LoginPage />} />
 
-            {/*   -- ThreadPage --  */}
-            <Route path="/thread/:threadId" element={<ThreadPage />} /> 
+              {/* -- RegisterPage -- */}
+              <Route path="/register" element={<RegisterPage />} />
 
-            {/* --CreateThreadPage-- */  }
-            <Route path="/createthread" element={<CreateThreadPage/>} />
+              {/*   -- ThreadPage --  */}
+              <Route path="/thread/:threadId" element={<ThreadPage />} /> 
 
-  {/*           <ToastContainer /> */}
+              {/* --CreateThreadPage-- */  }
+              <Route path="/createthread" element={<CreateThreadPage/>} />
 
-          </Routes>
-        </Router>
-      </UserProvider>
-    </CommentProvider>
+    {/*           <ToastContainer /> */}
+
+            </Routes>
+          </Router>
+        </UserProvider>
+      </CommentProvider>
+    </div>
   );
 }
 
