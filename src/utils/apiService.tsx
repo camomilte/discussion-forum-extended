@@ -107,6 +107,30 @@ export const singleThread = async (id: number): Promise<Thread> => {
 }
 
 /// /
+// Function to mark thread as resolved
+/// /
+export const resolveThread = async (id: number): Promise<void> => {
+   try {
+    const res = await api.post(`/threads/${id}/resolve`);
+
+    if (res.status === 204) {
+      console.log("Thread is marked as resolved");
+    }
+
+  } catch (error: any) {
+    if (error.response?.status === 401) {
+      console.error("Unauthorized: Invalid or expired token.");
+    } 
+
+    if (error.response?.status === 403) {
+      console.error("Only thread creator, admin or moderator can mark thread as resolved");
+    } else {
+      console.error(error);
+    }
+  };
+}
+
+/// /
 // Function to fetch all comments based of thread id
 /// /
 export const fetchThreadsComments = async (threadId:number): Promise<Comment[]> => {
@@ -120,4 +144,28 @@ export const fetchThreadsComments = async (threadId:number): Promise<Comment[]> 
 export const createComment = async(text: string, threadId: number): Promise<Comment> => {
   const res = await api.post<Comment>(`/threads/${threadId}/comments`, {Text: text});
   return res.data
+}
+
+/// /
+// Function to mark comment as answer
+/// /
+export const commentAsAnswer = async(commentId: number): Promise<void> => {
+    try {
+    const res = await api.post(`/comments/${commentId}/mark-as-answer`);
+
+    if (res.status === 204) {
+      console.log("Comment marked as answer");
+    }
+
+  } catch (error: any) {
+    if (error.response?.status === 401) {
+      console.error("Unauthorized: Invalid or expired token.");
+    } 
+
+    if (error.response?.status === 403) {
+      console.error("Only thread creator can mark comment as answer");
+    } else {
+      console.error(error);
+    }
+  };
 }

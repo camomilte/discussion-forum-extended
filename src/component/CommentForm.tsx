@@ -21,12 +21,10 @@ function CommentForm({ threadId }: CommentFormProps) {
   // State for loading status
   const [loading, setLoading] = useState(false);
 
-  const { isLoggedIn, user, currentUser } = useUser();
-  console.log("isLoggedIn:", isLoggedIn, "user:", user);
+  const { isLoggedIn, currentUser } = useUser();
 
   useEffect(() => {
     currentUser();
-    console.log("inside useeffect")
   }, []);
 
   /// /

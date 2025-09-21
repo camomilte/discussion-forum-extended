@@ -12,4 +12,5 @@ export type CommentContextType = {
 	comments: Comment[];
 	loadComments: (threadId: number) => Promise<void>;
 	addComment: (threadId: number, text: string) => Promise<void>;
+	markCommentAsAnswer: (commentId: string) => Promise<void>;
 }

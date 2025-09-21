@@ -2,7 +2,7 @@
 import type { Comment, CommentContextType } from "../models/comments";
 // Import React hooks and types
 import { createContext, useCallback, useContext, useState } from "react";
-import { createComment, fetchThreadsComments } from "../utils/apiService";
+import { commentAsAnswer, createComment, fetchThreadsComments } from "../utils/apiService";
 
 // Create new context for comments
 const CommentContext = createContext<CommentContextType | undefined>(undefined);
@@ -28,13 +28,21 @@ export const CommentProvider = ({ children }: { children: React.ReactNode }) => 
     setComments((prev) => [...prev, newComment]);
   }
 
+  /// / 
+  // Function to mark comment as answer
+  /// /
+  const markCommentAsAnswer = async (commentId: number) => {
+    return commentAsAnswer(commentId);
+  }
+
   // Provide comments array and grouped actions to all child components
   return (
     <CommentContext.Provider 
       value={{ 
         comments,
         loadComments,
-        addComment
+        addComment,
+        markCommentAsAnswer
         }}>
       {children}
     </CommentContext.Provider>

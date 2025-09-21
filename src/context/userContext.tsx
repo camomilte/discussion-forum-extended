@@ -1,5 +1,5 @@
 // React hooks and functions
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 // Types
 import type { UserProfile, UserContextType } from "../models/users";
 // Api functions
@@ -48,9 +48,19 @@ export const UserProvider: React.FC<{ children: React.ReactNode }> = ({ children
   const currentUser = async () => {
     const fetchedUser = await api.fetchMe();
     console.log("Fetched user:", fetchedUser);
-    setUser(fetchedUser);
-    setIsLoggedIn(!!fetchedUser);
+    if(fetchedUser) {
+      setUser(fetchedUser);
+      setIsLoggedIn(true);
+    } else {
+      setUser(null);
+      setIsLoggedIn(false);
+    }
   };
+
+  // Run once provider mounts
+  useEffect(() => {
+    currentUser();
+  }, []);
 
   /// /
   // Function to log out user

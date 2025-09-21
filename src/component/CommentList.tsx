@@ -3,14 +3,15 @@ import { PropagateLoader } from "react-spinners";
 import CommentItem from "./Comment";
 import { useEffect, useState } from "react";
 import { useComments } from "../context/commentContext";
+import type { Thread } from "../models/threads";
 
 // Define props for CommentList
 interface CommentListProps {
-  threadId: number;
+  thread: Thread;
 }
 
 // Define CommentList component
-function CommentList({ threadId }: CommentListProps) {
+function CommentList({ thread }: CommentListProps) {
   const { comments, loadComments } = useComments();
   // State for errors
   const [error, setError] = useState<string | null>(null);
@@ -23,7 +24,7 @@ useEffect(() => {
     setLoading(true);
     setError(null);
     try {
-      await loadComments(threadId);
+      await loadComments(thread.id);
     } catch (err: any) {
       setError(err.message || "Failed to fetch");
     } finally {
@@ -32,7 +33,7 @@ useEffect(() => {
   };
 
   fetchComments();
-}, [threadId, loadComments]);
+}, [thread.id, loadComments]);
 
   return (
     <div>
@@ -43,6 +44,7 @@ useEffect(() => {
         <CommentItem
           comment={comment}
           key={comment.id}
+          thread={thread}
           />
       ))}
     </div>
