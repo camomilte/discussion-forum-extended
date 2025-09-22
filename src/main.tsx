@@ -12,7 +12,7 @@ createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <ThreadProvider>
       <UserProvider>
-        <App />
+        <App  />
       </UserProvider>
     </ThreadProvider>
   </StrictMode>,

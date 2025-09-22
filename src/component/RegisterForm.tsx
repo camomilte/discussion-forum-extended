@@ -65,13 +65,13 @@ function RegisterForm() {
 
   // Rendered tsx
   return (
-    <form onSubmit={handleSubmit} className="max-w-sm mx-auto p-4 border rounded">
-      <h2 className="text-xl font-bold mb-4">Register</h2>
+    <form onSubmit={handleSubmit} className="w-96 md:max-w-xl mx-auto text-br-text">
+      <h1 className="text-2xl font-bold mb-4">Create an account</h1>
 
       {error && <p className="text-red-500 mb-2">{error}</p>}
 
-      <div className="mb-2">
-        <label htmlFor="email" className="block mb-1">
+      <div className="mb-7">
+        <label htmlFor="email" className="block mb-2 text-sm font-medium text-start">
           Email
         </label>
         <input
@@ -79,13 +79,13 @@ function RegisterForm() {
           type="text"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
-          className="w-full p-2 border rounded"
+          className="w-full p-2 border border-br-background-600 rounded-lg bg-br-background-800"
           required
         />
       </div>
 
-      <div className="mb-2">    
-        <label htmlFor="username" className="block mb-1">
+      <div className="mb-7">    
+        <label htmlFor="username" className="block mb-2 text-sm font-medium text-start">
           Username
         </label>
         <input
@@ -93,13 +93,13 @@ function RegisterForm() {
           type="text"
           value={username}
           onChange={(e) => setUsername(e.target.value)}
-          className="w-full p-2 border rounded"
+          className="w-full p-2 border border-br-background-600 rounded-lg bg-br-background-800"
           required
         />
       </div>
 
-      <div className="mb-4">
-        <label htmlFor="password" className="block mb-1">
+      <div className="mb-7">
+        <label htmlFor="password" className="block mb-2 text-sm font-medium text-start">
           Password
         </label>
         <input
@@ -107,13 +107,13 @@ function RegisterForm() {
           type="password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
-          className="w-full p-2 border rounded"
+          className="w-full p-2 border border-br-background-600 rounded-lg bg-br-background-800"
           required
         />
       </div>
 
-      <div className="mb-4">
-        <label htmlFor="repeatPassword" className="block mb-1">
+      <div className="mb-7">
+        <label htmlFor="repeatPassword" className="block mb-2 text-sm font-medium text-start">
           Repeat password
         </label>
         <input
@@ -121,7 +121,7 @@ function RegisterForm() {
           type="password"
           value={repeatPassword}
           onChange={(e) => setRepeatPassword(e.target.value)}
-          className="w-full p-2 border rounded"
+          className="w-full p-2 border border-br-background-600 rounded-lg bg-br-background-800"
           required
         />
       </div>
@@ -129,7 +129,7 @@ function RegisterForm() {
       <button
         type="submit"
         disabled={loading}
-        className="w-full p-2 bg-blue-500 text-white rounded hover:bg-blue-600"
+        className="w-full p-2 bg-brand text-br-background rounded-lg hover:bg-brand-300"
       >
         {loading ? "Registering..." : "Register"}
       </button>

@@ -35,7 +35,7 @@ function ThreadPage() {
   }
 
   return (
-    <div className="bg-br-background">
+    <div >
       <ThreadDetail thread={currentThread}/>
       <div>
         {currentThread && (

@@ -2,8 +2,7 @@ import LoginForm from "../component/LoginForm.tsx";
 
 function LoginPage() {
   return (
-    <div>
-      <h1>LOGIN PAGE</h1>
+    <div className="flex items-center justify-center h-[calc(100vh-6rem)]">
       <LoginForm />
     </div>
   );
