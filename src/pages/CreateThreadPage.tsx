@@ -34,19 +34,22 @@ function CreateThreadPage() {
   return (
     <div>
       {loading ? (
-        <PropagateLoader /> 
+        <div className="flex justify-center items-center h-120">
+            <PropagateLoader color="#40b83d"/>
+        </div>
       ) : error ? (
         <p className="text-red-500 mb-2">{error}</p>
       ) : isLoggedIn ? (
-        <>
-          <h1>CREATE THREAD PAGE</h1>
+        <div className="flex items-center justify-center h-[calc(100vh-6rem)]">
           <CreateThreadForm />
-        </>
+        </div>
       ) : (
-        <>
-          <p>You must be logged in to create a thread</p>
-          <Link to="/login">Log in</Link> or <Link to="/register">Create account</Link>
-        </>
+        <div className="flex flex-col gap-4 items-center justify-center h-[calc(100vh-6rem)]">
+          <p className="text-br-text text-xl">You must be logged in to create a thread</p>
+          <span className="text-br-text text-xl">
+            <Link to="/login" className="text-xl font-bold text-brand hover:text-brand-300">Log in</Link> or <Link to="/register" className="text-xl font-bold text-brand hover:text-brand-300">Create account</Link>
+          </span>
+        </div>
       )}
     </div>
   );

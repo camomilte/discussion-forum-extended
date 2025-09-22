@@ -6,11 +6,12 @@ export type Comment = {
 	owner: string;
 	ownerId: number;
   createdAt: string;
+	answer: boolean;
 }
 
 export type CommentContextType = {
 	comments: Comment[];
 	loadComments: (threadId: number) => Promise<void>;
 	addComment: (threadId: number, text: string) => Promise<void>;
-	markCommentAsAnswer: (commentId: string) => Promise<void>;
+	markCommentAsAnswer: (commentId: number) => Promise<void>;
 }

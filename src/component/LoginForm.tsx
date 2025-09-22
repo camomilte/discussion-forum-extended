@@ -1,7 +1,7 @@
 // React functions
 import { useState } from "react";
 // React router functions
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 // User Context hook
 import { useUser } from "../context/userContext";
 
@@ -88,6 +88,7 @@ function LoginForm() {
       >
         {loading ? "Logging in..." : "Login"}
       </button>
+      <p className="pt-3">Don't have an account? <Link to="/register" className="text-brand underline">Click here</Link> to create one!</p>
     </form>
   )
 }

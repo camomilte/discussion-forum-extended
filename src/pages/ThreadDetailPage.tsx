@@ -35,7 +35,7 @@ function ThreadPage() {
   }
 
   return (
-    <div >
+    <div className="max-w-4xl mx-auto mt-4">
       <ThreadDetail thread={currentThread}/>
       <div>
         {currentThread && (
@@ -44,10 +44,8 @@ function ThreadPage() {
             <CommentForm threadId={currentThread.id} />
           </>
         )}
-        <div className="mt-3">
-          <Link to="/" className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 focus:outline-none">View all threads</Link>
-        </div>
       </div>
+      <Link to="/" className="w-full p-2 bg-brand text-br-background rounded-lg hover:bg-brand-300">View all threads</Link>
     </div>
   );
 }

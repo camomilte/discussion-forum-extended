@@ -13,9 +13,6 @@ import { CommentProvider } from "./context/commentContext";
 import RegisterPage from "./pages/RegisterPage";
 import { UserProvider } from "./context/userContext";
 import RootLayout from "./layouts/RootLayout";
-import { ToastContainer } from "react-toastify/unstyled";
-
-import "react-toastify/dist/ReactToastify.css";
 
 
 
@@ -25,7 +22,6 @@ function App() {
     <CommentProvider>
       <UserProvider>
         <Router>
-          <ToastContainer /> 
           <Routes>
             <Route path="/" element={<RootLayout />}>
 

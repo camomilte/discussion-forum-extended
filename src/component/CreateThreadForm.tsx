@@ -70,48 +70,48 @@ const CreateThreadForm: React.FC = () => {
   
   // Rendered TSX
   return (
-    <form onSubmit={handleSubmit} className="max-w-sm mx-auto p-4 border rounded">
-      <h2 className="text-xl font-bold mb-4">Create thread</h2>
+    <form onSubmit={handleSubmit} className="w-96 md:max-w-xl mx-auto text-br-text">
+      <h2 className="text-2xl font-bold mb-4">Create thread</h2>
 
       {error && <p className="text-red-500 mb-2">{error}</p>}
 
-      <div className="mb-2">
-        <label htmlFor="header" className="block mb-1">
-          Header
+      <div className="mb-7">
+        <label htmlFor="header" className="block mb-2 text-sm font-medium text-start">
+          Thread title
         </label>
         <input
           id="header"
           type="text"
           value={header}
           onChange={(e) => setHeader(e.target.value)}
-          className="w-full p-2 border rounded"
+          className="w-full p-2 border border-br-background-600 rounded-lg bg-br-background-800"
           required
         />
       </div>
 
-      <div className="mb-4">
-        <label htmlFor="text" className="block mb-1">
-          Text
+      <div className="mb-7">
+        <label htmlFor="text" className="block mb-2 text-sm font-medium text-start">
+          Content
         </label>
-        <input
+        <textarea
           id="text"
-          type="text"
+          rows={3}
           value={text}
           onChange={(e) => setText(e.target.value)}
-          className="w-full p-2 border rounded"
+          className="w-full p-2 border border-br-background-600 rounded-lg bg-br-background-800"
           required
         />
       </div>
-      <div className="mb-4">
-        <label htmlFor="category" className="block mb-1">Category</label>
+      <div className="mb-7">
+        <label htmlFor="category" className="block mb-2 text-sm font-medium text-start">Category</label>
         <select
           id="category"
           value={category}
           onChange={(e) => setCategory(e.target.value as ThreadCategory)}
-          className="w-full p-2 border rounded"
+          className="w-full p-2 border border-br-background-600 rounded-lg bg-br-background-800"
           required
         >
-          <option value="">-- Select a category --</option>
+          <option value="" className='p-2'>Select a category</option>
           {categories.map((cat) => (
             <option key={cat} value={cat}>{cat}</option>
           ))}
@@ -121,7 +121,7 @@ const CreateThreadForm: React.FC = () => {
       <button
         type="submit"
         disabled={loading}
-        className="w-full p-2 bg-blue-500 text-white rounded hover:bg-blue-600"
+        className="w-full p-2 bg-brand text-br-background rounded-lg hover:bg-brand-300"
       >
         {loading ? "Submitting..." : "Submit"}
       </button>

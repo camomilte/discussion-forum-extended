@@ -133,7 +133,7 @@ function RegisterForm() {
       >
         {loading ? "Registering..." : "Register"}
       </button>
-      <p>Already have an account? <Link to="/login">Click here</Link> to log in</p>
+      <p className="pt-3">Already have an account? <Link to="/login" className="text-brand underline">Click here</Link> to log in</p>
     </form>
   )
 }
