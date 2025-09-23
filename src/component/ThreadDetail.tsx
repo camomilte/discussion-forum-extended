@@ -15,7 +15,7 @@ function ThreadDetail({ thread }: ThreadDetailProps) {
   console.log(thread)
 
   return (
-      <div className="text-br-text p-6 border-b border-br-background-800 text-start">
+      <div className="text-br-text py-6 border-b border-br-background-800 text-start">
         <div className="flex items-center justify-between">
           <div className="flex gap-1 text-br-accent">
             <AccountCircleIcon fontSize="medium"/>

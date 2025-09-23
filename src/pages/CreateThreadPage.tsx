@@ -47,7 +47,7 @@ function CreateThreadPage() {
         <div className="flex flex-col gap-4 items-center justify-center h-[calc(100vh-6rem)]">
           <p className="text-br-text text-xl">You must be logged in to create a thread</p>
           <span className="text-br-text text-xl">
-            <Link to="/login" className="text-xl font-bold text-brand hover:text-brand-300">Log in</Link> or <Link to="/register" className="text-xl font-bold text-brand hover:text-brand-300">Create account</Link>
+            <Link to="/login" className="text-xl font-bold text-brand hover:text-brand-300 underline">Log in</Link> or <Link to="/register" className="text-xl font-bold text-brand hover:text-brand-300 underline">Create account</Link>
           </span>
         </div>
       )}

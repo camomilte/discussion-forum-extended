@@ -9,6 +9,7 @@ import { PropagateLoader } from "react-spinners";
 import { useEffect } from "react";
 import { useThread } from "../context/threadContext";
 import CommentList from "../component/CommentList";
+import ErrorIcon from '@mui/icons-material/Error';
 
 
 // Define ThreadPage components
@@ -23,11 +24,19 @@ function ThreadPage() {
   }, [threadId, getThread]);
 
   if(loading) {
-    return <PropagateLoader />;
+    return (
+      <div className="flex justify-center items-center h-120">
+        <PropagateLoader color="#40b83d"/>
+      </div>
+    )
   }
 
   if(error) {
-    return <p>{error}</p>
+    return (
+      <div className="border border-red-400 p-3 rounded-lg w-96 md:w-[70%] mx-auto flex mt-5">
+        <ErrorIcon className="text-red-400 pe-1 "/><p className="text-red-400">{error}</p>
+      </div>
+    )
   }
 
   if(!currentThread) {
@@ -35,7 +44,7 @@ function ThreadPage() {
   }
 
   return (
-    <div className="max-w-4xl mx-auto mt-4">
+    <div className="max-w-96 md:max-w-4xl mx-auto py-4">
       <ThreadDetail thread={currentThread}/>
       <div>
         {currentThread && (
@@ -45,7 +54,6 @@ function ThreadPage() {
           </>
         )}
       </div>
-      <Link to="/" className="w-full p-2 bg-brand text-br-background rounded-lg hover:bg-brand-300">View all threads</Link>
     </div>
   );
 }

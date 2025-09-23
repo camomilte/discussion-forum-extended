@@ -61,26 +61,32 @@ function CommentForm({ threadId }: CommentFormProps) {
 
 
   return (
-    <form className="formlayout comment-form" onSubmit={handleSubmit}>
+    <form className="text-br-text flex flex-col gap-3" onSubmit={handleSubmit}>
       {isLoggedIn ? (
         <>
+          <label htmlFor="text" className="block text-lg font-medium text-start">
+            Join the conversation
+          </label>
           <textarea
-            className="textarea-input flex"
+            className="w-full p-2 border border-br-background-600 rounded-lg bg-br-background-800"
             id="text"
+            rows={3}
             value={text}
             onChange={(e) => setText(e.target.value)}
-            placeholder="Join the conversation"
+            placeholder="Enter text here"
           />
           {error && <p className="text-red-500 mb-2">{error}</p>}
-          <button className="btn form-btn" type="submit">
+          <button className="w-full p-2 md:p-3 bg-brand text-br-background rounded-lg hover:bg-brand-300 cursor-pointer" type="submit">
             {loading ? "Adding comment..." : "Add comment"}
           </button>
+          <Link to="/" className="w-full p-2 md:p-3 text-brand rounded-lg hover:bg-br-background-800 border cursor-pointer border-brand">View all threads</Link>
         </>
       ) : (
-        <div>
+        <div className="flex flex-col gap-5 my-5">
           <p>
-           <Link to="/register">Create account</Link> or <Link to="/login">Log in</Link> to join the conversation
+           <Link to="/register" className="text-brand underline hover:text-brand-300">Create account</Link> or <Link to="/login" className="text-brand underline hover:text-brand-300">Log in</Link> to join the conversation
           </p>
+          <Link to="/" className="w-full md:w-50 mx-auto p-2 md:p-3 text-brand rounded-lg hover:bg-br-background-800 border cursor-pointer border-brand">View all threads</Link>
         </div>
       )}
     </form>

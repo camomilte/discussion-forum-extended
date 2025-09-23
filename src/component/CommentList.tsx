@@ -4,6 +4,7 @@ import CommentItem from "./Comment";
 import { useEffect, useState } from "react";
 import { useComments } from "../context/commentContext";
 import type { Thread } from "../models/threads";
+import ErrorIcon from '@mui/icons-material/Error';
 
 // Define props for CommentList
 interface CommentListProps {
@@ -38,8 +39,14 @@ useEffect(() => {
   return (
     <div>
       {/* Render CommentItem for each comment in Comment array */}
-      {error && <p className="text-red-500 mb-2">{error}</p>}
-      {loading && <PropagateLoader />}
+      {error && 
+        <div className="border border-red-400 p-3 rounded-lg w-96 md:w-[70%] mx-auto flex mt-5">
+          <ErrorIcon className="text-red-400 pe-1 "/><p className="text-red-400">{error}</p>
+        </div>}
+      {loading &&  
+        <div className="flex justify-center items-center h-120">
+          <PropagateLoader color="#40b83d"/>
+        </div>}
       {comments.map((comment) => (
         <CommentItem
           comment={comment}

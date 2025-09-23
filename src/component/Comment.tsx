@@ -4,6 +4,10 @@ import { useComments } from "../context/commentContext";
 import { useUser } from "../context/userContext";
 import type { Comment } from "../models/comments";
 import type { Thread } from "../models/threads";
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import CheckCircleIcon from '@mui/icons-material/CheckCircle';
+
+
 
 // Define props for CommentItem
 interface CommentItemProps {
@@ -15,12 +19,15 @@ interface CommentItemProps {
 
 // Define CommentItem component
 function CommentItem({ comment, thread }: CommentItemProps) {
-  const { markCommentAsAnswer } = useComments();
+  const { markCommentAsAnswer, comments } = useComments();
   const { user } = useUser();
 
   const canMark = user?.id === thread.ownerId;
 
   const [isAnswer, setIsAnswer] = useState(comment.answer);
+
+  const threadHasAnswer = comments.some(c => c.answer);
+
 
   const handleMarkAsAnswer = async () => {
     try {
@@ -32,34 +39,43 @@ function CommentItem({ comment, thread }: CommentItemProps) {
     }
   };
 
+  console.log(isAnswer)
+
   
   return (
-    <div className="background-gray-200 comment-container flex flex-col">
-      <div className="flex flex-row justify-between">
-        <p className="thread-info">
-          {new Date(comment.createdAt).toDateString()}
-        </p>
-        {comment.answer && <p>Answer!</p>}
+    <div className="text-br-text my-5">
+      
+        <div className="flex items-center justify-between opacity-70">
+          <div className="flex gap-1">
+            <AccountCircleIcon fontSize="medium"/>
+            <span className="self-center align-middle">{thread.owner}</span>
+          </div>
+          <p>{new Date(thread.createdAt).toDateString()}</p> 
+        </div>
+        
+        <div className="border-l border-b ml-2.5 mt-1 border-br-background-800 rounded-bl-lg pb-3 pl-3">
+          <div className={`flex justify-between ${comment.answer && "bg-br-accent/20 rounded-md p-3"}`}>
+            <p className="text-start">{comment.text}</p>
+            {comment.answer && 
+              <span className="flex gap-1 text-br-accent">
+                <p>Answer</p>
+                <CheckCircleIcon fontSize="medium" className="align-bottom"/>
+              </span>
+            }
+            {canMark && !comment.answer && (
+              <button 
+                onClick={handleMarkAsAnswer}
+                disabled={threadHasAnswer}
+                className={`rounded-lg py-1 px-5 ${threadHasAnswer ? "bg-br-background-700 text-br-background/50" : "bg-br-accent text-br-background hover:bg-br-accent-600 cursor-pointer"}`}>
+                Mark as answer
+              </button>
+            )}
+          </div>
+        </div>
 
-      </div>
-      <p className="align-start comment-content">{comment.text}</p>
 
-      {canMark && !comment.answer && (
-        <button 
-          onClick={handleMarkAsAnswer}
-          disabled={isAnswer}
-          className={comment.answer ? "btn-disabled" : "btn"}>
-          Answer
-        </button>
-      )}
-
-      <div className="flex user-info background-secondary align-end">
-        {/* Show creator's username or anon if none is provided */}
-        <p>{comment.owner || "Anon"}</p>
-      </div>
       
 
-        
     </div>
   );
 }
