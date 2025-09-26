@@ -41,16 +41,15 @@ function CommentItem({ comment, thread }: CommentItemProps) {
 
   console.log(isAnswer)
 
-  
   return (
     <div className="text-br-text my-5">
       
         <div className="flex items-center justify-between opacity-70">
           <div className="flex gap-1">
             <AccountCircleIcon fontSize="medium"/>
-            <span className="self-center align-middle">{thread.owner}</span>
+            <span className="self-center align-middle">{comment.owner}</span>
           </div>
-          <p>{new Date(thread.createdAt).toDateString()}</p> 
+          <p>{new Date(comment.createdAt).toDateString()}</p> 
         </div>
         
         <div className="border-l border-b ml-2.5 mt-1 border-br-background-800 rounded-bl-lg pb-3 pl-3">
