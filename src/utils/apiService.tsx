@@ -134,7 +134,7 @@ export const resolveThread = async (id: number): Promise<void> => {
 // Function to fetch all comments based of thread id
 /// /
 export const fetchThreadsComments = async (threadId:number): Promise<Comment[]> => {
-  const res = await api.get<Comment[]>(`/threads/${threadId}/comments`);
+  const res = await api.get<Comment[]>(`/threads/${threadId}/comments`,);
   return res.data
 }
 
@@ -147,14 +147,18 @@ export const createComment = async(text: string, threadId: number): Promise<Comm
 }
 
 /// /
-// Function to mark comment as answer
+// Function to mark set comment answer state
 /// /
-export const commentAsAnswer = async(commentId: number): Promise<void> => {
-    try {
-    const res = await api.post(`/comments/${commentId}/mark-as-answer`);
-
-    if (res.status === 204) {
-      console.log("Comment marked as answer");
+export const commentAnswerStateAPI = async(commentId: number, isAnswer: boolean ): Promise<void> => {
+  try {
+    const res = await api.patch(`/comments/${commentId}/answer`, {isAnswer: isAnswer}
+    );
+    if(res.status === 202) {
+      if(isAnswer === true) {
+        console.log("Comment marked as answer");
+      } else {
+        console.log("Comment no longer marked as answer");
+      }
     }
 
   } catch (error: any) {

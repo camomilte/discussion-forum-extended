@@ -19,27 +19,21 @@ interface CommentItemProps {
 
 // Define CommentItem component
 function CommentItem({ comment, thread }: CommentItemProps) {
-  const { markCommentAsAnswer, comments } = useComments();
+  const { setCommentAnswerState } = useComments();
   const { user } = useUser();
 
   const canMark = user?.id === thread.ownerId;
 
-  const [isAnswer, setIsAnswer] = useState(comment.answer);
 
-  const threadHasAnswer = comments.some(c => c.answer);
 
 
   const handleMarkAsAnswer = async () => {
     try {
-      await markCommentAsAnswer(comment.id);
-      setIsAnswer(true);
+      await setCommentAnswerState(comment.id, !comment.answer);
     } catch (err) {
-      setIsAnswer(false);
       console.error("Failed to mark as answer", err);
     }
   };
-
-  console.log(isAnswer)
 
   return (
     <div className="text-br-text my-5">
@@ -61,12 +55,11 @@ function CommentItem({ comment, thread }: CommentItemProps) {
                 <CheckCircleIcon fontSize="medium" className="align-bottom"/>
               </span>
             }
-            {canMark && !comment.answer && (
+            {canMark && (
               <button 
                 onClick={handleMarkAsAnswer}
-                disabled={threadHasAnswer}
-                className={`rounded-lg py-1 px-5 ${threadHasAnswer ? "bg-br-background-700 text-br-background/50" : "bg-br-accent text-br-background hover:bg-br-accent-600 cursor-pointer"}`}>
-                Mark as answer
+                className="rounded-lg py-1 px-5 bg-br-accent text-br-background hover:bg-br-accent-600 cursor-pointer">
+                {comment.answer ? "Unmark as answer" : "Mark as answer"}
               </button>
             )}
           </div>

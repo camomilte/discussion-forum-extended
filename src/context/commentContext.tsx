@@ -2,7 +2,7 @@
 import type { Comment, CommentContextType } from "../models/comments";
 // Import React hooks and types
 import { createContext, useCallback, useContext, useState } from "react";
-import { commentAsAnswer, createComment, fetchThreadsComments } from "../utils/apiService";
+import { commentAnswerStateAPI, createComment, fetchThreadsComments } from "../utils/apiService";
 
 // Create new context for comments
 const CommentContext = createContext<CommentContextType | undefined>(undefined);
@@ -29,10 +29,17 @@ export const CommentProvider = ({ children }: { children: React.ReactNode }) => 
   }
 
   /// / 
-  // Function to mark comment as answer
+  // Function to set comment answer state
   /// /
-  const markCommentAsAnswer = async (commentId: number) => {
-    return commentAsAnswer(commentId);
+  const setCommentAnswerState = async (commentId: number, isAnswer: boolean) => {
+    // anropa API:t (som returnerar uppdaterad kommentar)
+    await commentAnswerStateAPI(commentId, isAnswer);
+
+    const updatedComments = comments.map(c =>
+      c.id === commentId ? { ...c, answer: isAnswer } : c
+    );
+    setComments(updatedComments);
+    console.log(updatedComments.find(c => c.id === commentId)); // nu ser du nya värdet
   }
 
   // Provide comments array and grouped actions to all child components
@@ -42,7 +49,7 @@ export const CommentProvider = ({ children }: { children: React.ReactNode }) => 
         comments,
         loadComments,
         addComment,
-        markCommentAsAnswer
+        setCommentAnswerState,
         }}>
       {children}
     </CommentContext.Provider>
